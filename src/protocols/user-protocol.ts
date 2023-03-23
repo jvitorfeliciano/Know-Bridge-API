@@ -2,4 +2,6 @@ import { User } from "@prisma/client";
 
 type SignUpUserSchema = Omit<User, "id" | "createdAt">;
 
-export { SignUpUserSchema };
+type SignInUserSchema = Pick<User, "email" | "password">;
+
+export { SignUpUserSchema, SignInUserSchema };

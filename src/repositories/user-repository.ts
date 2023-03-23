@@ -1,6 +1,5 @@
 import { prisma } from "@/config";
 import { SignUpUserSchema } from "@/protocols";
-import { User } from "@prisma/client";
 
 async function findUserByUserName(userName: string) {
     return await prisma.user.findUnique({
@@ -24,10 +23,18 @@ async function createUser(data: SignUpUserSchema) {
     });
 }
 
+async function createSession(userId: number) {
+    return await prisma.session.create({
+        data: {
+            userId,
+        },
+    });
+}
 const userRepository = {
     findUserByUserName,
     findUserByEmail,
     createUser,
+    createSession,
 };
 
 export default userRepository;
