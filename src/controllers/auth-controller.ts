@@ -10,7 +10,7 @@ async function signUp(req: Request, res: Response) {
         res.sendStatus(httpStatus.CREATED);
     } catch (err) {
         if (err.name === "ConflictError") {
-            return res.status(httpStatus.CONFLICT).send({ message: err.message });
+            return res.status(httpStatus.CONFLICT).send({ errors: [err.message] });
         }
     }
 }
@@ -23,7 +23,7 @@ async function signIn(req: Request, res: Response) {
         res.status(httpStatus.OK).send({ token });
     } catch (err) {
         if (err.name === "InvalidCredentialsError") {
-            return res.status(httpStatus.UNAUTHORIZED).send({ message: err.message });
+            return res.status(httpStatus.UNAUTHORIZED).send({ errors: [err.message] });
         }
     }
 }
