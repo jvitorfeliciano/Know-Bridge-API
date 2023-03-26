@@ -66,7 +66,7 @@ async function signIn(object: SignInUserSchema) {
 
     const token = generateUserToken(sessionId);
 
-    return token;
+    return { firstName: user.firstName, userName: user.userName, token };
 }
 
 export const authService = {
