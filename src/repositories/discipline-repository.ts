@@ -18,3 +18,5 @@ const disciplineRepository = {
     create,
     findUniqueByTitle,
 };
+
+export default disciplineRepository;
