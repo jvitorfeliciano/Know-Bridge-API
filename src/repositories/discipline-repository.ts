@@ -16,5 +16,5 @@ async function findUniqueByTitle(title: string) {
 }
 const disciplineRepository = {
     create,
-    findUniqueByTitle
+    findUniqueByTitle,
 };
