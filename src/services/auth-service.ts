@@ -59,6 +59,7 @@ function generateUserToken(sessionId: number) {
 
     return token;
 }
+
 async function signIn(object: SignInUserSchema) {
     const user = await checkValidEmail(object.email);
     await comparePassword(object.password, user.password);

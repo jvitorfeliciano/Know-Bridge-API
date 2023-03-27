@@ -1,13 +1,13 @@
 import { loadEnv } from "@/config";
 import express, { json } from "express";
 import cors from "cors";
-import { authRouter } from "@/routers";
+import { authRouter, disciplineRouter } from "@/routers";
 
 loadEnv();
 
 const server = express();
 
-server.use(json()).use(cors()).use("/auth", authRouter);
+server.use(json()).use(cors()).use("/auth", authRouter).use("/discipline", disciplineRouter);
 
 const port = process.env.PORT || 4000;
 
