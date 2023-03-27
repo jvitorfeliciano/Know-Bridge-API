@@ -18,6 +18,13 @@ async function postDiscipline(object: DisciplineData) {
     return discipline;
 }
 
+async function getDisciplines(){
+    const disciplines = await disciplineRepository.findMany();
+
+    return disciplines;
+}
+
 export const disciplineService = {
-    postDiscipline
+    postDiscipline,
+    getDisciplines
 }

@@ -22,7 +22,7 @@ async function findMany() {
 const disciplineRepository = {
     create,
     findUniqueByTitle,
-    findMany
+    findMany,
 };
 
 export default disciplineRepository;
