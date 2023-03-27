@@ -15,3 +15,13 @@ export async function postDiscipline(req: Request, res: Response) {
         }
     }
 }
+
+export async function getDisciplines(req: Request, res: Response) {
+    try {
+        const disciplines = await disciplineService.getDisciplines();
+
+        res.status(httpStatus.OK).send(disciplines);
+    } catch (err) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ errors: err.message });
+    }
+}
