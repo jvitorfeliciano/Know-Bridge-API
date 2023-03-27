@@ -1,8 +1,5 @@
-/*  async function postDiscipline(){
-    
-}  */
-
 import { conflictError } from "@/errors";
+import { DisciplineData } from "@/protocols";
 import disciplineRepository from "@/repositories/discipline-repository";
 
 async function checkDisciplineExistenceByTitle(title: string) {
@@ -11,4 +8,16 @@ async function checkDisciplineExistenceByTitle(title: string) {
     if (discipline) {
         throw conflictError("Disciplina já cadastrada");
     }
+}
+
+async function postDiscipline(object: DisciplineData) {
+    await checkDisciplineExistenceByTitle(object.title);
+
+    const discipline = await disciplineRepository.create(object);
+
+    return discipline;
+}
+
+export const disciplineService = {
+    postDiscipline
 }
