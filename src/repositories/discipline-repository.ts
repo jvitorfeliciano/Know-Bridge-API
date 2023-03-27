@@ -14,9 +14,15 @@ async function findUniqueByTitle(title: string) {
         },
     });
 }
+
+async function findMany() {
+    return await prisma.discipline.findMany({});
+}
+
 const disciplineRepository = {
     create,
     findUniqueByTitle,
+    findMany
 };
 
 export default disciplineRepository;
