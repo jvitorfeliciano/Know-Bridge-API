@@ -7,7 +7,12 @@ loadEnv();
 
 const server = express();
 
-server.use(json()).use(cors()).use("/auth", authRouter).use("/disciplines", disciplineRouter).use("/trail", trailRouter);
+server
+    .use(json())
+    .use(cors())
+    .use("/auth", authRouter)
+    .use("/disciplines", disciplineRouter)
+    .use("/trails", trailRouter);
 
 const port = process.env.PORT || 4000;
 

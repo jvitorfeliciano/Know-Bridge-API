@@ -19,3 +19,13 @@ export async function postTrail(req: Request, res: Response) {
         }
     }
 }
+
+export async function getTrails(req: Request, res: Response) {
+    try {
+        const trails = await trailService.getTrails();
+
+        res.status(httpStatus.OK).send(trails);
+    } catch (err) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ errors: err.message });
+    }
+}

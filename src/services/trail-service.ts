@@ -19,6 +19,13 @@ async function postTrail(data: TrailData) {
     return trail;
 }
 
+async function getTrails() {
+    const trails = await trailRepository.findMany();
+
+    return trails;
+}
+
 export const trailService = {
     postTrail,
+    getTrails,
 };
