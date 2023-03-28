@@ -113,7 +113,7 @@ model Question {
   createdAt DateTime           @default(now())
 }
 
-model Answer {
+model Answer {´
   id         Int      @id @default(autoincrement())
   isCorrect  Boolean
   questionId Int
