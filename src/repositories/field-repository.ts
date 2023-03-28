@@ -7,9 +7,17 @@ function create(data: FieldData) {
     });
 }
 
+function findUniqueById(id: number) {
+    return prisma.field.findUnique({
+        where: {
+            id,
+        },
+    });
+}
 
 const fieldRepository = {
     create,
+    findUniqueById,
 };
 
 export default fieldRepository;
