@@ -6,9 +6,17 @@ function create(data: TrailData) {
         data,
     });
 }
+function findUniqueByTitle(title: string) {
+    return prisma.trail.findUnique({
+        where: {
+            title,
+        },
+    });
+}
 
 const trailRepository = {
     create,
+    findUniqueByTitle,
 };
 
 export default trailRepository;

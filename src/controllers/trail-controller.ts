@@ -11,6 +11,8 @@ export async function postTrail(req: Request, res: Response) {
 
         res.status(httpStatus.OK).send(trail);
     } catch (err) {
-        console.log(err);
+        if (err.name === "ConflictError") {
+            return res.status(httpStatus.CONFLICT).send({ errors: err.message });
+        }
     }
 }
