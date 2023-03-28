@@ -1,13 +1,13 @@
-import { FieldData } from "@/protocols";
-import { fieldService } from "@/services";
+import { SubfieldData } from "@/protocols";
+import { subfieldService } from "@/services";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-export async function postField(req: Request, res: Response) {
-    const data: FieldData = req.body;
+export async function postSubfield(req: Request, res: Response) {
+    const data: SubfieldData = req.body;
 
     try {
-        const field = await fieldService.postField(data);
+        const field = await subfieldService.postSubfield(data);
 
         res.status(httpStatus.CREATED).send(field);
     } catch (err) {
