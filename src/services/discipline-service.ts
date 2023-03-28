@@ -1,4 +1,4 @@
-import { conflictError } from "@/errors";
+import { conflictError, notFoundError } from "@/errors";
 import { DisciplineData } from "@/protocols";
 import disciplineRepository from "@/repositories/discipline-repository";
 
@@ -18,13 +18,22 @@ async function postDiscipline(object: DisciplineData) {
     return discipline;
 }
 
-async function getDisciplines(){
+async function getDisciplines() {
     const disciplines = await disciplineRepository.findMany();
 
     return disciplines;
 }
 
+async function checkDisciplineExistenceById(id: number) {
+    const discipline = await disciplineRepository.findById(id);
+
+    if (!discipline) {
+        throw notFoundError("Disciplina não encontrada");
+    }
+}
+
 export const disciplineService = {
     postDiscipline,
-    getDisciplines
-}
+    getDisciplines,
+    checkDisciplineExistenceById,
+};

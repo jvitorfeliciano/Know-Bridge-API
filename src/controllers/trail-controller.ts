@@ -14,5 +14,8 @@ export async function postTrail(req: Request, res: Response) {
         if (err.name === "ConflictError") {
             return res.status(httpStatus.CONFLICT).send({ errors: err.message });
         }
+        if (err.name === "NotFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
+        }
     }
 }

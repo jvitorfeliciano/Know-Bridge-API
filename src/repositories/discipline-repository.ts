@@ -1,28 +1,37 @@
 import { prisma } from "@/config";
 import { DisciplineData } from "@/protocols";
 
-async function create(data: DisciplineData) {
-    return await prisma.discipline.create({
+function create(data: DisciplineData) {
+    return prisma.discipline.create({
         data,
     });
 }
 
-async function findUniqueByTitle(title: string) {
-    return await prisma.discipline.findUnique({
+function findUniqueByTitle(title: string) {
+    return prisma.discipline.findUnique({
         where: {
             title,
         },
     });
 }
 
-async function findMany() {
-    return await prisma.discipline.findMany({});
+function findById(id: number) {
+    return prisma.discipline.findUnique({
+        where: {
+            id,
+        },
+    });
+}
+
+function findMany() {
+    return prisma.discipline.findMany({});
 }
 
 const disciplineRepository = {
     create,
     findUniqueByTitle,
     findMany,
+    findById,
 };
 
 export default disciplineRepository;
