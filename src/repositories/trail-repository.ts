@@ -24,7 +24,11 @@ function findUniqueById(id: number) {
 }
 
 function findMany() {
-    return prisma.trail.findMany({});
+    return prisma.trail.findMany({
+        include: {
+            fields: true,
+        },
+    });
 }
 
 const trailRepository = {
