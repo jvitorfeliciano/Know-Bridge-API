@@ -9,7 +9,7 @@ export async function postTrail(req: Request, res: Response) {
     try {
         const trail = await trailService.postTrail(data);
 
-        res.status(httpStatus.OK).send(trail);
+        res.status(httpStatus.CREATED).send(trail);
     } catch (err) {
         if (err.name === "ConflictError") {
             return res.status(httpStatus.CONFLICT).send({ errors: err.message });

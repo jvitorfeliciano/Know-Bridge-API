@@ -8,7 +8,7 @@ export async function postDiscipline(req: Request, res: Response) {
     try {
         const discipline = await disciplineService.postDiscipline(body);
 
-        res.status(httpStatus.OK).send(discipline);
+        res.status(httpStatus.CREATED).send(discipline);
     } catch (err) {
         if (err.name === "ConflictError") {
             return res.status(httpStatus.CONFLICT).send({ errors: err.message });
