@@ -15,6 +15,14 @@ function findUniqueByTitle(title: string) {
     });
 }
 
+function findUniqueById(id: number) {
+    return prisma.field.findUnique({
+        where: {
+            id,
+        },
+    });
+}
+
 function findMany() {
     return prisma.trail.findMany({});
 }
@@ -22,6 +30,7 @@ function findMany() {
 const trailRepository = {
     create,
     findUniqueByTitle,
+    findUniqueById,
     findMany,
 };
 
