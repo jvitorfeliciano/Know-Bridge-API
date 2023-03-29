@@ -4,3 +4,4 @@ export * from "./discipline-protocol";
 export * from "./trail-protocol";
 export * from "./field-protocol";
 export * from "./subfield-protocol";
+export * from "./video-protocol";
