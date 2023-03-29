@@ -5,3 +5,4 @@ export * from "./field-schema";
 export * from "./subfield-schema";
 export * from "./video-schema";
 export * from "./article-schema";
+export * from "./question-schema";
