@@ -5,12 +5,12 @@ import httpStatus from "http-status";
 import jwt from "jsonwebtoken";
 
 export function jwtVerify(req: AuthenticatedRequest, res: Response, next: NextFunction, token: string) {
-    jwt.verify(token, process.env.JWT_SECRET as string, async (error, decoded: { id: number }) => {
+    jwt.verify(token, process.env.JWT_SECRET as string, async (error, decoded: { sessionId: number }) => {
         if (error) {
             return res.sendStatus(httpStatus.UNAUTHORIZED);
         }
-
-        const session = await userRepository.findSessionById(decoded.id);
+  
+        const session = await userRepository.findSessionById(decoded.sessionId);
 
         if (!session) {
             return res.sendStatus(httpStatus.UNAUTHORIZED);
@@ -21,7 +21,7 @@ export function jwtVerify(req: AuthenticatedRequest, res: Response, next: NextFu
         if (!user) {
             return res.sendStatus(httpStatus.UNAUTHORIZED);
         }
-
+        console.log(user.id);
         req.userId = user.id;
         next();
     });

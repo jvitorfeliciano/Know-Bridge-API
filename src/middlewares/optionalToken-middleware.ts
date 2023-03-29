@@ -7,7 +7,7 @@ export async function optionalToken(req: AuthenticatedRequest, res: Response, ne
     const { authorization } = req.headers;
 
     const token = authorization?.replace("Bearer ", "");
-
+    
     if (token) {
         try {
             jwtVerify(req, res, next, token);

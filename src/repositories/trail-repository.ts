@@ -31,11 +31,21 @@ function findMany() {
     });
 }
 
+function findManyWithUsersEnrolled() {
+    return prisma.trail.findMany({
+        include: {
+            fields: true,
+            users: true,
+        },
+    });
+}
+
 const trailRepository = {
     create,
     findUniqueByTitle,
     findUniqueById,
     findMany,
+    findManyWithUsersEnrolled
 };
 
 export default trailRepository;

@@ -1,4 +1,4 @@
-import { TrailData } from "@/protocols";
+import { AuthenticatedRequest, TrailData } from "@/protocols";
 import { trailService } from "@/services";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
@@ -20,9 +20,10 @@ export async function postTrail(req: Request, res: Response) {
     }
 }
 
-export async function getTrails(req: Request, res: Response) {
+export async function getTrails(req: AuthenticatedRequest, res: Response) {
+    const userId =  req.userId;
     try {
-        const trails = await trailService.getTrails();
+        const trails = await trailService.getTrails(userId);
 
         res.status(httpStatus.OK).send(trails);
     } catch (err) {

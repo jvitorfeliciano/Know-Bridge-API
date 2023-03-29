@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { TrailsOnUsers, User } from "@prisma/client";
 import { Request } from "express";
 
 type SignUpUserSchema = Omit<User, "id" | "createdAt">;
@@ -11,4 +11,6 @@ type JWTPayload = {
 
 type AuthenticatedRequest = Request & JWTPayload;
 
-export { SignUpUserSchema, SignInUserSchema, AuthenticatedRequest };
+type UserVector  = TrailsOnUsers[];
+
+export { SignUpUserSchema, SignInUserSchema, AuthenticatedRequest, UserVector };
