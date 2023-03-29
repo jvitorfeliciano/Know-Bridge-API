@@ -21,7 +21,7 @@ export function jwtVerify(req: AuthenticatedRequest, res: Response, next: NextFu
         if (!user) {
             return res.sendStatus(httpStatus.UNAUTHORIZED);
         }
-        console.log(user.id);
+ 
         req.userId = user.id;
         next();
     });

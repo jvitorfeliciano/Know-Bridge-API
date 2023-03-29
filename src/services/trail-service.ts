@@ -55,15 +55,17 @@ async function checkTrailExistenceById(id: number) {
 async function createEnrollmentOntrail(userId: number, trailId: number) {
     await checkTrailExistenceById(trailId);
 
-    const register = await trailRepository.createTrailsOnUsers(userId, trailId);
+    await trailRepository.createTrailsOnUsers(userId, trailId);
 
-    return register;
+    return { isEnrolled: true };
 }
 
 async function deleteUserEnrollmentOnTrail(userId: number, trailId: number) {
     await checkTrailExistenceById(trailId);
 
     await trailRepository.deleteTrailsOnUsers(userId, trailId);
+
+    return { isEnrolled: false };
 }
 
 async function getTrailById(id: number) {
