@@ -1,5 +1,5 @@
 import { VideoData } from "@/protocols";
-import { subfieldService, videoService } from "@/services";
+import { videoService } from "@/services";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 

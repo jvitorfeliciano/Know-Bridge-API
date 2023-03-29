@@ -5,3 +5,4 @@ export * from "./trail-protocol";
 export * from "./field-protocol";
 export * from "./subfield-protocol";
 export * from "./video-protocol";
+export * from "./article-protocol";
