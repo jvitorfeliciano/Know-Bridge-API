@@ -66,10 +66,21 @@ async function deleteUserEnrollmentOnTrail(userId: number, trailId: number) {
     await trailRepository.deleteTrailsOnUsers(userId, trailId);
 }
 
+async function getTrailById(id: number) {
+    const trail = await trailRepository.findByIdWithFieldsAndSubfields(id);
+
+    if (!trail) {
+        throw notFoundError("Trilha não cadastrada");
+    }
+
+    return trail;
+}
+
 export const trailService = {
     postTrail,
     getTrails,
     checkTrailExistenceById,
     createEnrollmentOntrail,
     deleteUserEnrollmentOnTrail,
+    getTrailById,
 };

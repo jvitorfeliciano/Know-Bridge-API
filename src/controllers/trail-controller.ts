@@ -60,3 +60,17 @@ export async function deleteUserEnrollmentOnTrail(req: AuthenticatedRequest, res
         }
     }
 }
+
+export async function getTrailById(req: AuthenticatedRequest, res: Response) {
+    const trailId = Number(req.params.trailId);
+
+    try {
+        const trail = await trailService.getTrailById(trailId);
+
+        res.status(httpStatus.OK).send(trail);
+    } catch (err) {
+        if (err.name === "NotFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
+        }
+    }
+}

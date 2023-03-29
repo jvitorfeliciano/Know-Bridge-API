@@ -57,6 +57,21 @@ function deleteTrailsOnUsers(userId: number, trailId: number) {
     });
 }
 
+function findByIdWithFieldsAndSubfields(id: number) {
+    return prisma.trail.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            fields: {
+                include: {
+                    subfields: true,
+                },
+            },
+        },
+    });
+}
+
 const trailRepository = {
     create,
     findUniqueByTitle,
@@ -64,7 +79,8 @@ const trailRepository = {
     findMany,
     findManyWithUsersEnrolled,
     createTrailsOnUsers,
-    deleteTrailsOnUsers
+    deleteTrailsOnUsers,
+    findByIdWithFieldsAndSubfields,
 };
 
 export default trailRepository;
