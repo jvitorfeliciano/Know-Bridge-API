@@ -81,24 +81,27 @@ model Subfield {
 }
 
 model Video {
-  id            Int        @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   title         String
   videoAdress   String
   chapterNumber Int
   subfieldId    Int
-  subfield      Subfield   @relation(fields: [subfieldId], references: [id])
+  subfield      Subfield     @relation(fields: [subfieldId], references: [id])
   articles      Article[]
   questions     Question[]
-  createdAt     DateTime   @default(now())
+  type          MaterialType @default(VIDEO)
+  createdAt     DateTime     @default(now())
 }
 
 model Article {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
   title     String
+  author    String
   content   String
   videoId   Int
-  video     Video    @relation(fields: [videoId], references: [id])
-  createdAt DateTime @default(now())
+  video     Video        @relation(fields: [videoId], references: [id])
+  type      MaterialType @default(ARTICLE)
+  createdAt DateTime     @default(now())
 }
 
 model Question {
@@ -110,11 +113,13 @@ model Question {
   video     Video              @relation(fields: [videoId], references: [id])
   answers   Answer[]
   users     QuestionsOnUsers[]
+  type      MaterialType       @default(QUESTION)
   createdAt DateTime           @default(now())
 }
 
-model Answer {´
+model Answer {
   id         Int      @id @default(autoincrement())
+  answer     String
   isCorrect  Boolean
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])
@@ -127,4 +132,10 @@ model QuestionsOnUsers {
   question   Question @relation(fields: [questionId], references: [id])
 
   @@id([userId, questionId])
+}
+
+enum MaterialType {
+  VIDEO
+  ARTICLE
+  QUESTION
 }
