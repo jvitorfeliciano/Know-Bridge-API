@@ -1,14 +1,23 @@
 import { prisma } from "@/config";
 import { SubfieldData } from "@/protocols";
 
-function create(data: SubfieldData){
+function create(data: SubfieldData) {
     return prisma.subfield.create({
-        data
-    })
+        data,
+    });
+}
+
+function findUniqueById(id: number) {
+    return prisma.subfield.findUnique({
+        where: {
+            id,
+        },
+    });
 }
 
 const subfieldRepository = {
-    create
-}
+    create,
+    findUniqueById
+};
 
 export default subfieldRepository;
