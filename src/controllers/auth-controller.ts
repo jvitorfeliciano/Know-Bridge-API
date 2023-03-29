@@ -10,7 +10,7 @@ async function signUp(req: Request, res: Response) {
         res.sendStatus(httpStatus.CREATED);
     } catch (err) {
         if (err.name === "ConflictError") {
-            return res.status(httpStatus.CONFLICT).send({ errors: [err.message] });
+            return res.status(httpStatus.CONFLICT).send({ errors: err.message });
         }
     }
 }
@@ -18,13 +18,14 @@ async function signUp(req: Request, res: Response) {
 async function signIn(req: Request, res: Response) {
     const body: SignInUserSchema = req.body;
     try {
-        const token = await authService.signIn(body);
+        const data = await authService.signIn(body);
 
-        res.status(httpStatus.OK).send({ token });
+        res.status(httpStatus.OK).send(data);
     } catch (err) {
         if (err.name === "InvalidCredentialsError") {
-            return res.status(httpStatus.UNAUTHORIZED).send({ errors: [err.message] });
+            return res.status(httpStatus.UNAUTHORIZED).send({ errors: err.message});
         }
     }
 }
+
 export { signUp, signIn };
