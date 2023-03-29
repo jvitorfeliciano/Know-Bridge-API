@@ -31,11 +31,40 @@ function findMany() {
     });
 }
 
+function findManyWithUsersEnrolled() {
+    return prisma.trail.findMany({
+        include: {
+            fields: true,
+            users: true,
+        },
+    });
+}
+
+function createTrailsOnUsers(userId: number, trailId: number) {
+    return prisma.trailsOnUsers.create({
+        data: {
+            userId,
+            trailId,
+        },
+    });
+}
+
+function deleteTrailsOnUsers(userId: number, trailId: number) {
+    return prisma.trailsOnUsers.delete({
+        where: {
+            userId_trailId: { userId, trailId },
+        },
+    });
+}
+
 const trailRepository = {
     create,
     findUniqueByTitle,
     findUniqueById,
     findMany,
+    findManyWithUsersEnrolled,
+    createTrailsOnUsers,
+    deleteTrailsOnUsers
 };
 
 export default trailRepository;

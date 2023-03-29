@@ -1,5 +1,5 @@
 import { conflictError, notFoundError } from "@/errors";
-import { TrailData } from "@/protocols";
+import { TrailData, TrailVector } from "@/protocols";
 import trailRepository from "@/repositories/trail-repository";
 import { disciplineService } from "@/services";
 
@@ -19,8 +19,27 @@ async function postTrail(data: TrailData) {
     return trail;
 }
 
-async function getTrails() {
-    const trails = await trailRepository.findMany();
+function verifyUserEnrollmentOnTrail(vector: TrailVector, userId: number) {
+    vector.forEach((trail) => {
+        if (trail.users.some((user) => user.userId === userId)) {
+            trail.isEnrolled = true;
+            delete trail.users;
+        } else {
+            trail.isEnrolled = false;
+            delete trail.users;
+        }
+    });
+}
+
+async function getTrails(userId: number) {
+    let trails;
+
+    if (userId) {
+        trails = await trailRepository.findManyWithUsersEnrolled();
+        verifyUserEnrollmentOnTrail(trails, userId);
+    } else {
+        trails = await trailRepository.findMany();
+    }
 
     return trails;
 }
@@ -33,8 +52,24 @@ async function checkTrailExistenceById(id: number) {
     }
 }
 
+async function createEnrollmentOntrail(userId: number, trailId: number) {
+    await checkTrailExistenceById(trailId);
+
+    const register = await trailRepository.createTrailsOnUsers(userId, trailId);
+
+    return register;
+}
+
+async function deleteUserEnrollmentOnTrail(userId: number, trailId: number) {
+    await checkTrailExistenceById(trailId);
+
+    await trailRepository.deleteTrailsOnUsers(userId, trailId);
+}
+
 export const trailService = {
     postTrail,
     getTrails,
     checkTrailExistenceById,
+    createEnrollmentOntrail,
+    deleteUserEnrollmentOnTrail,
 };
