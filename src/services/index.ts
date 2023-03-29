@@ -5,3 +5,4 @@ export * from "./field-service";
 export * from "./subfield-service";
 export * from "./video-service";
 export * from "./article-service";
+export * from "./question-service";
