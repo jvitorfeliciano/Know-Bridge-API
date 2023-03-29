@@ -40,12 +40,31 @@ function findManyWithUsersEnrolled() {
     });
 }
 
+function createTrailsOnUsers(userId: number, trailId: number) {
+    return prisma.trailsOnUsers.create({
+        data: {
+            userId,
+            trailId,
+        },
+    });
+}
+
+function deleteTrailsOnUsers(userId: number, trailId: number) {
+    return prisma.trailsOnUsers.delete({
+        where: {
+            userId_trailId: { userId, trailId },
+        },
+    });
+}
+
 const trailRepository = {
     create,
     findUniqueByTitle,
     findUniqueById,
     findMany,
-    findManyWithUsersEnrolled
+    findManyWithUsersEnrolled,
+    createTrailsOnUsers,
+    deleteTrailsOnUsers
 };
 
 export default trailRepository;

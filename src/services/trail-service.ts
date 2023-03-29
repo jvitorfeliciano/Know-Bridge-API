@@ -52,8 +52,17 @@ async function checkTrailExistenceById(id: number) {
     }
 }
 
+async function createEnrollmentOntrail(userId: number, trailId: number) {
+    await checkTrailExistenceById(trailId);
+
+    const register = await trailRepository.createTrailsOnUsers(userId, trailId);
+
+    return register;
+}
+
 export const trailService = {
     postTrail,
     getTrails,
     checkTrailExistenceById,
+    createEnrollmentOntrail,
 };
