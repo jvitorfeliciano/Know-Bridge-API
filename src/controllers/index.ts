@@ -3,3 +3,6 @@ export * from "./discipline-controller";
 export * from "./trail-controller";
 export * from "./field-controller";
 export * from "./subfield-cotroller";
+export * from "./video-controller";
+export * from "./article-controller";
+export * from "./question-controller";

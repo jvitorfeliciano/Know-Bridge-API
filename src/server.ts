@@ -1,7 +1,16 @@
 import { loadEnv } from "@/config";
 import express, { json } from "express";
 import cors from "cors";
-import { authRouter, disciplineRouter, fieldRouter, subfieldRouter, trailRouter } from "@/routers";
+import {
+    articleRouter,
+    authRouter,
+    disciplineRouter,
+    fieldRouter,
+    questionRouter,
+    subfieldRouter,
+    trailRouter,
+    videoRouter,
+} from "@/routers";
 
 loadEnv();
 
@@ -14,7 +23,10 @@ server
     .use("/disciplines", disciplineRouter)
     .use("/trails", trailRouter)
     .use("/fields", fieldRouter)
-    .use("/subfields", subfieldRouter);
+    .use("/subfields", subfieldRouter)
+    .use("/videos", videoRouter)
+    .use("/articles", articleRouter)
+    .use("/questions", questionRouter);
 
 const port = process.env.PORT || 4000;
 
