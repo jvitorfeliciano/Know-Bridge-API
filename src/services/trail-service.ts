@@ -60,9 +60,16 @@ async function createEnrollmentOntrail(userId: number, trailId: number) {
     return register;
 }
 
+async function deleteUserEnrollmentOnTrail(userId: number, trailId: number) {
+    await checkTrailExistenceById(trailId);
+
+    await trailRepository.deleteTrailsOnUsers(userId, trailId);
+}
+
 export const trailService = {
     postTrail,
     getTrails,
     checkTrailExistenceById,
     createEnrollmentOntrail,
+    deleteUserEnrollmentOnTrail,
 };

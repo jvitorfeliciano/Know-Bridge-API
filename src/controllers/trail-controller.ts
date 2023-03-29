@@ -45,3 +45,18 @@ export async function postUserEnrollmentOnTrail(req: AuthenticatedRequest, res: 
         }
     }
 }
+
+export async function deleteUserEnrollmentOnTrail(req: AuthenticatedRequest, res: Response) {
+    const trailId = Number(req.params.trailId);
+    const userId = req.userId;
+
+    try {
+        await trailService.deleteUserEnrollmentOnTrail(userId, trailId);
+
+        res.sendStatus(httpStatus.OK);
+    } catch (err) {
+        if (err.name === "NotFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
+        }
+    }
+}
