@@ -1,3 +1,4 @@
+import { notFoundError } from "@/errors";
 import { VideoData } from "@/protocols";
 import videoRepository from "@/repositories/video-repository";
 import { subfieldService } from "./subfield-service";
@@ -9,6 +10,15 @@ async function postVideo(data: VideoData) {
     return video;
 }
 
+async function checkVideoExistenceById(id: number) {
+    const video = await videoRepository.findUniqueById(id);
+
+    if (!video) {
+        throw notFoundError("Video não cadastrado!");
+    }
+}
+
 export const videoService = {
     postVideo,
+    checkVideoExistenceById,
 };

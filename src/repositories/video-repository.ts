@@ -6,9 +6,17 @@ function create(data: VideoData) {
         data,
     });
 }
+function findUniqueById(id: number) {
+    return prisma.video.findUnique({
+        where: {
+            id,
+        },
+    });
+}
 
 const videoRepository = {
     create,
+    findUniqueById,
 };
 
 export default videoRepository;
