@@ -87,6 +87,39 @@ function findByIdWithFieldsAndSubfields(id: number) {
     });
 }
 
+function findByIdWithFieldsSubfieldsAndQuestions(id: number) {
+    return prisma.trail.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            fields: {
+                orderBy: {
+                    unitNumber: "asc",
+                },
+                include: {
+                    subfields: {
+                        orderBy: {
+                            lessonNumber: "asc",
+                        },
+                        include: {
+                            videos: {
+                                include: {
+                                    questions: {
+                                        include: {
+                                            users: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    });
+}
+
 const trailRepository = {
     create,
     findUniqueByTitle,
@@ -96,6 +129,7 @@ const trailRepository = {
     createTrailsOnUsers,
     deleteTrailsOnUsers,
     findByIdWithFieldsAndSubfields,
+    findByIdWithFieldsSubfieldsAndQuestions,
 };
 
 export default trailRepository;

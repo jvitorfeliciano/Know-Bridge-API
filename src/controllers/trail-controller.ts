@@ -63,9 +63,9 @@ export async function deleteUserEnrollmentOnTrail(req: AuthenticatedRequest, res
 
 export async function getTrailById(req: AuthenticatedRequest, res: Response) {
     const trailId = Number(req.params.trailId);
-
+    const userId = req.userId;
     try {
-        const trail = await trailService.getTrailById(trailId);
+        const trail = await trailService.getTrailById(userId, trailId);
 
         res.status(httpStatus.OK).send(trail);
     } catch (err) {
