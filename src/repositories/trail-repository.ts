@@ -26,7 +26,11 @@ function findUniqueById(id: number) {
 function findMany() {
     return prisma.trail.findMany({
         include: {
-            fields: true,
+            fields: {
+                orderBy: {
+                    unitNumber: "asc",
+                },
+            },
         },
     });
 }
@@ -34,7 +38,11 @@ function findMany() {
 function findManyWithUsersEnrolled() {
     return prisma.trail.findMany({
         include: {
-            fields: true,
+            fields: {
+                orderBy: {
+                    unitNumber: "asc",
+                },
+            },
             users: true,
         },
     });
@@ -57,6 +65,7 @@ function deleteTrailsOnUsers(userId: number, trailId: number) {
     });
 }
 
+
 function findByIdWithFieldsAndSubfields(id: number) {
     return prisma.trail.findUnique({
         where: {
@@ -64,8 +73,26 @@ function findByIdWithFieldsAndSubfields(id: number) {
         },
         include: {
             fields: {
+                orderBy: {
+                    unitNumber: "asc",
+                },
                 include: {
-                    subfields: true,
+                    subfields: {
+                        orderBy: {
+                            lessonNumber: "asc",
+                        },
+                        include: {
+                            videos: {
+                                include: {
+                                    questions: {
+                                        include: {
+                                            users: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
