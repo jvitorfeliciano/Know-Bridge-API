@@ -45,7 +45,7 @@ async function getTrails(userId: number) {
 }
 
 async function checkTrailExistenceById(id: number) {
-    const trail = await trailRepository.findUniqueById(id);
+    const trail = await trailRepository.findById(id);
 
     if (!trail) {
         throw notFoundError("Trilha não cadastrada");

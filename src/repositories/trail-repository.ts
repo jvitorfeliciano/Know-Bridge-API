@@ -15,7 +15,7 @@ function findUniqueByTitle(title: string) {
     });
 }
 
-function findUniqueById(id: number) {
+function findById(id: number) {
     return prisma.field.findUnique({
         where: {
             id,
@@ -65,7 +65,6 @@ function deleteTrailsOnUsers(userId: number, trailId: number) {
     });
 }
 
-
 function findByIdWithFieldsAndSubfields(id: number) {
     return prisma.trail.findUnique({
         where: {
@@ -81,17 +80,6 @@ function findByIdWithFieldsAndSubfields(id: number) {
                         orderBy: {
                             lessonNumber: "asc",
                         },
-                        include: {
-                            videos: {
-                                include: {
-                                    questions: {
-                                        include: {
-                                            users: true,
-                                        },
-                                    },
-                                },
-                            },
-                        },
                     },
                 },
             },
@@ -102,7 +90,7 @@ function findByIdWithFieldsAndSubfields(id: number) {
 const trailRepository = {
     create,
     findUniqueByTitle,
-    findUniqueById,
+    findById,
     findMany,
     findManyWithUsersEnrolled,
     createTrailsOnUsers,
