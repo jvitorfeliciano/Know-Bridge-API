@@ -36,9 +36,9 @@ export async function postUserEnrollmentOnTrail(req: AuthenticatedRequest, res: 
     const userId = req.userId;
 
     try {
-        await trailService.createEnrollmentOntrail(userId, trailId);
+        const enrollmentStatus = await trailService.createEnrollmentOntrail(userId, trailId);
 
-        res.sendStatus(httpStatus.CREATED);
+        res.status(httpStatus.CREATED).send(enrollmentStatus);
     } catch (err) {
         if (err.name === "NotFoundError") {
             return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
@@ -51,9 +51,23 @@ export async function deleteUserEnrollmentOnTrail(req: AuthenticatedRequest, res
     const userId = req.userId;
 
     try {
-        await trailService.deleteUserEnrollmentOnTrail(userId, trailId);
+        const enrollmentStatus = await trailService.deleteUserEnrollmentOnTrail(userId, trailId);
 
-        res.sendStatus(httpStatus.OK);
+        res.status(httpStatus.OK).send(enrollmentStatus);
+    } catch (err) {
+        if (err.name === "NotFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
+        }
+    }
+}
+
+export async function getTrailById(req: AuthenticatedRequest, res: Response) {
+    const trailId = Number(req.params.trailId);
+    const userId = req.userId;
+    try {
+        const trail = await trailService.getTrailById(userId, trailId);
+
+        res.status(httpStatus.OK).send(trail);
     } catch (err) {
         if (err.name === "NotFoundError") {
             return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });

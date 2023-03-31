@@ -18,3 +18,4 @@ export async function optionalToken(req: AuthenticatedRequest, res: Response, ne
         next();
     }
 }
+
