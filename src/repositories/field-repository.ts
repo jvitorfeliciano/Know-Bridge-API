@@ -15,9 +15,30 @@ function findUniqueById(id: number) {
     });
 }
 
+function findByIdWithSubfields(id: number) {
+    return prisma.field.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            subfields: {
+                include: {
+                    videos: {
+                        include: {
+                            questions: true,
+                            articles: true,
+                        },
+                    },
+                },
+            },
+        },
+    });
+}
+
 const fieldRepository = {
     create,
     findUniqueById,
+    findByIdWithSubfields,
 };
 
 export default fieldRepository;

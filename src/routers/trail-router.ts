@@ -14,6 +14,6 @@ export const trailRouter = Router();
 trailRouter
     .post("/", validateBody(trailSchema), postTrail)
     .get("/", optionalToken, getTrails)
-    .get("/:trailId", getTrailById)
+    .get("/:trailId", optionalToken, getTrailById)
     .post("/users/:trailId", requireToken, postUserEnrollmentOnTrail)
     .delete("/users/:trailId", requireToken, deleteUserEnrollmentOnTrail);

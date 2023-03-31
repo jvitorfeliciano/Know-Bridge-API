@@ -9,6 +9,7 @@ export async function optionalToken(req: AuthenticatedRequest, res: Response, ne
     const token = authorization?.replace("Bearer ", "");
     
     if (token) {
+    
         try {
             jwtVerify(req, res, next, token);
         } catch (error) {
@@ -18,4 +19,5 @@ export async function optionalToken(req: AuthenticatedRequest, res: Response, ne
         next();
     }
 }
+
 
