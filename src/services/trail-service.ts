@@ -69,8 +69,7 @@ async function deleteUserEnrollmentOnTrail(userId: number, trailId: number) {
 }
 
 function computeProgressPercentage(trailObject: TrailObject, userId: number) {
- /*    console.log(new Date().getTime()); */
- /*    console.log(userId) */
+    console.log(new Date().getTime());
     trailObject.fields.forEach((field) => {
         let numberOfQuestions = 0;
         let numberOfQuestionsDone = 0;
@@ -90,17 +89,12 @@ function computeProgressPercentage(trailObject: TrailObject, userId: number) {
 
         if (numberOfQuestions === 0 || numberOfQuestionsDone === 0) {
             field.progressPercentage = 0;
-            console.log(numberOfQuestionsDone)
-            console.log(numberOfQuestions)
         } else {
-            console.log(numberOfQuestionsDone)
-            console.log(numberOfQuestions)
-            field.progressPercentage = Number((numberOfQuestionsDone / numberOfQuestions).toFixed(2)) * 100; 
+            field.progressPercentage = Number((numberOfQuestionsDone / numberOfQuestions).toFixed(2)) * 100;
         }
     });
 
-  /*   console.log(new Date().getTime()); */
-   
+    console.log(new Date().getTime());
 }
 
 async function getTrailById(userId: number, trailId: number) {

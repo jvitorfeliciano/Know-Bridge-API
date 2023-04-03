@@ -11,14 +11,25 @@ async function postSubfield(data: SubfieldData) {
 }
 
 async function checkSubfieldExistenceById(id: number) {
-    const subfield = await subfieldRepository.findUniqueById(id);
+    const subfield = await subfieldRepository.findById(id);
 
     if (!subfield) {
         throw notFoundError("Subfield não cadastrado!");
     }
 }
 
+async function getSubfieldByIdWithMaterials(id: number) {
+    const subfield = await subfieldRepository.findByIdwithMaterials(id);
+
+    if (!subfield) {
+        throw notFoundError("Subfield não cadastrado!");
+    }
+
+    return subfield;
+}
+
 export const subfieldService = {
     postSubfield,
     checkSubfieldExistenceById,
+    getSubfieldByIdWithMaterials,
 };

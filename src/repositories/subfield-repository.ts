@@ -7,7 +7,7 @@ function create(data: SubfieldData) {
     });
 }
 
-function findUniqueById(id: number) {
+function findById(id: number) {
     return prisma.subfield.findUnique({
         where: {
             id,
@@ -15,9 +15,26 @@ function findUniqueById(id: number) {
     });
 }
 
+function findByIdwithMaterials(id: number) {
+    return prisma.subfield.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            videos: {
+                include: {
+                    questions: true,
+                    articles: true,
+                },
+            },
+        },
+    });
+}
+
 const subfieldRepository = {
     create,
-    findUniqueById
+    findById,
+    findByIdwithMaterials,
 };
 
 export default subfieldRepository;
