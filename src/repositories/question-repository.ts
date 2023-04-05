@@ -14,8 +14,18 @@ function create(data: QuestionData) {
     });
 }
 
+function postQuestionsOnUsers(userId: number, questionId: number) {
+    return prisma.questionsOnUsers.create({
+        data: {
+            userId,
+            questionId,
+        },
+    });
+}
+
 const questionRepository = {
     create,
+    postQuestionsOnUsers
 };
 
 export default questionRepository;

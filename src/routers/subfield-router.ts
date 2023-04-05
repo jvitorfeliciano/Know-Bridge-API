@@ -5,4 +5,4 @@ import { Router } from "express";
 
 export const subfieldRouter = Router();
 
-subfieldRouter.post("/", validateBody(subfieldSchema), postSubfield).get("/", optionalToken, getSubfieldById);
+subfieldRouter.post("/", validateBody(subfieldSchema), postSubfield).get("/:subfieldId", optionalToken, getSubfieldById);

@@ -23,7 +23,16 @@ function findByIdwithMaterials(id: number) {
         include: {
             videos: {
                 include: {
-                    questions: true,
+                    questions: {
+                        include: {
+                            answers: {
+                                select: {
+                                    id: true,
+                                    answer: true,
+                                },
+                            },
+                        },
+                    },
                     articles: true,
                 },
             },
