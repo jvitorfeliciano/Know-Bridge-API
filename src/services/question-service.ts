@@ -20,7 +20,7 @@ async function validateQuestionAnswer(userId: number, answerId: number) {
     }
 
     if (answer.isCorrect === false) {
-        throw conflictError("Resposta Incorreta");
+        throw conflictError("Resposta Incorreta!");
     }
 
     if (userId) {
@@ -30,5 +30,5 @@ async function validateQuestionAnswer(userId: number, answerId: number) {
 
 export const questionService = {
     postQuestion,
-    validateQuestionAnswer
+    validateQuestionAnswer,
 };
