@@ -20,6 +20,7 @@ export async function postQuestion(req: Request, res: Response) {
 export async function validateQuestionAnswer(req: AuthenticatedRequest, res: Response) {
     const userId = req.userId;
     const answerId = Number(req.params.answerId);
+  console.log(userId);
     try {
         await questionService.validateQuestionAnswer(userId, answerId);
 
@@ -29,7 +30,7 @@ export async function validateQuestionAnswer(req: AuthenticatedRequest, res: Res
             return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
         }
         if (err.name === "ConflictError") {
-            return res.status(httpStatus.NOT_FOUND).send({ errors: err.message });
+            return res.status(httpStatus.CONFLICT).send({ errors: err.message });
         }
     }
 }
