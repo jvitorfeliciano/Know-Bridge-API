@@ -13,12 +13,23 @@ async function postField(data: FieldData) {
 async function checkFieldExistenceById(id: number) {
     const field = await fieldRepository.findUniqueById(id);
 
-    if(!field){
-        throw notFoundError("Field não cadastrado!")
+    if (!field) {
+        throw notFoundError("Field não cadastrado!");
     }
+}
+
+async function getFieldByIdWithItsSubfields(id: number) {
+    const field = await fieldRepository.findByIdWithSubfields(id);
+
+    if (!field) {
+        throw notFoundError("Field não cadastrado!");
+    }
+
+    return field;
 }
 
 export const fieldService = {
     postField,
-    checkFieldExistenceById
+    checkFieldExistenceById,
+    getFieldByIdWithItsSubfields,
 };

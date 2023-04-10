@@ -1,8 +1,8 @@
 import { validateBody } from "@/middlewares";
 import { Router } from "express";
 import { fieldSchema } from "@/schemas";
-import { postField } from "@/controllers";
+import { getFieldByIdWithItsSubfields, postField } from "@/controllers";
 
 export const fieldRouter = Router();
 
-fieldRouter.post("/", validateBody(fieldSchema), postField);
+fieldRouter.post("/", validateBody(fieldSchema), postField).get("/:fieldId", getFieldByIdWithItsSubfields);

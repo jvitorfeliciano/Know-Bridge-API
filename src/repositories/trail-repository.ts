@@ -16,7 +16,7 @@ function findUniqueByTitle(title: string) {
 }
 
 function findById(id: number) {
-    return prisma.field.findUnique({
+    return prisma.trail.findUnique({
         where: {
             id,
         },
