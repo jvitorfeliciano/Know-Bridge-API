@@ -77,6 +77,9 @@ function findByIdWithFieldsAndSubfields(id: number) {
                 },
                 include: {
                     subfields: {
+                        include: {
+                            videos: true,
+                        },
                         orderBy: {
                             lessonNumber: "asc",
                         },

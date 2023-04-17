@@ -19,9 +19,10 @@ export async function postSubfield(req: Request, res: Response) {
 
 export async function getSubfieldById(req: AuthenticatedRequest, res: Response) {
     const subfieldId = Number(req.params.subfieldId);
+    const userId =  req.userId;
 
     try {
-        const subfield = await subfieldService.getSubfieldByIdWithMaterials(subfieldId);
+        const subfield = await subfieldService.getSubfieldByIdWithMaterials(userId, subfieldId);
 
         res.status(httpStatus.OK).send(subfield);
     } catch (err) {

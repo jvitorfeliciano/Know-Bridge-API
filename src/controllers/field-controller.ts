@@ -19,9 +19,10 @@ export async function postField(req: Request, res: Response) {
 
 export async function getFieldByIdWithItsSubfields(req: AuthenticatedRequest, res: Response) {
     const fieldId = Number(req.params.fieldId);
+    const userId = req.userId;
 
     try {
-        const field = await fieldService.getFieldByIdWithItsSubfields(fieldId);
+        const field = await fieldService.getFieldByIdWithItsSubfields(userId, fieldId);
 
         res.status(httpStatus.OK).send(field);
     } catch (err) {

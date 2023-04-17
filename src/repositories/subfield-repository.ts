@@ -15,7 +15,7 @@ function findById(id: number) {
     });
 }
 
-function findByIdwithMaterials(id: number) {
+function findByIdWithMaterials(id: number) {
     return prisma.subfield.findUnique({
         where: {
             id,
@@ -40,10 +40,39 @@ function findByIdwithMaterials(id: number) {
     });
 }
 
+function findByIdWithMaterialsAndUsers(id: number){
+    return prisma.subfield.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            videos: {
+                include: {
+                    questions: {
+                        include: {
+                            answers: {
+                                select: {
+                                    id: true,
+                                    answer: true,
+                                },
+                            },
+                            users: true,
+                        },
+                    
+                    },
+                    articles: true,
+                },
+            },
+        },
+    });
+}
+
+
 const subfieldRepository = {
     create,
     findById,
-    findByIdwithMaterials,
+    findByIdWithMaterials,
+    findByIdWithMaterialsAndUsers
 };
 
 export default subfieldRepository;

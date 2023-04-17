@@ -75,16 +75,17 @@ function computeProgressPercentage(trailObject: TrailObject, userId: number) {
         let numberOfQuestionsDone = 0;
 
         field.subfields.forEach((subfield) => {
-            subfield.videos.forEach((video) =>
+            subfield.videos.forEach((video) => {
                 video.questions.forEach((question) => {
                     numberOfQuestions++;
 
                     if (question.users.some((user) => user.userId === userId)) {
                         numberOfQuestionsDone++;
                     }
-                }),
-            ),
-                delete subfield.videos;
+                });
+
+                delete video.questions;
+            });
         });
 
         if (numberOfQuestions === 0 || numberOfQuestionsDone === 0) {
@@ -96,7 +97,7 @@ function computeProgressPercentage(trailObject: TrailObject, userId: number) {
 
     console.log(new Date().getTime());
 }
-
+/* delete subfield.videos; */
 async function getTrailById(userId: number, trailId: number) {
     let trail;
 
