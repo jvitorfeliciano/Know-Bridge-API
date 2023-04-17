@@ -9,6 +9,7 @@ import {
     questionRouter,
     subfieldRouter,
     trailRouter,
+    userRouter,
     videoRouter,
 } from "@/routers";
 
@@ -26,7 +27,8 @@ server
     .use("/subfields", subfieldRouter)
     .use("/videos", videoRouter)
     .use("/articles", articleRouter)
-    .use("/questions", questionRouter);
+    .use("/questions", questionRouter)
+    .use("/users", userRouter);
 
 const port = process.env.PORT || 4000;
 

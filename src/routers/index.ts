@@ -6,3 +6,4 @@ export * from "./subfield-router";
 export * from "./video-router";
 export * from "./article-router";
 export * from "./question-router";
+export * from "./user-router";

@@ -47,13 +47,29 @@ function findUserById(id: number) {
     });
 }
 
+function findUserByUserNameWithCourses(userName: string) {
+    return prisma.user.findUnique({
+        where: {
+            userName,
+        },
+        select: {
+            trails: {
+                select: {
+                    trail: true,
+                },
+            },
+        },
+    });
+}
+
 const userRepository = {
     findUserByUserName,
     findUserByEmail,
     createUser,
     createSession,
     findSessionById,
-    findUserById
+    findUserById,
+    findUserByUserNameWithCourses,
 };
 
 export default userRepository;
